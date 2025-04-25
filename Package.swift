@@ -2,19 +2,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "SheetPresenter",
+    name: "BottomSheetPresenter",
     platforms: [
         .iOS(.v13) // supports iOS 13 and later
     ],
     products: [
         .library(
-            name: "SheetPresenter",
-            targets: ["SheetPresenter"]
+            name: "BottomSheetPresenter",
+            targets: ["BottomSheetPresenter"]
         ),
     ],
     targets: [
         .target(
-            name: "SheetPresenter",
+            name: "BottomSheetPresenter",
             path: "Sources"
         )
     ]
