@@ -30,6 +30,18 @@ class ViewController: UIViewController {
         buttons.append(button)
 
         button = UIButton(type: .system)
+        button.setTitle("large + medium", for: .normal)
+        button.addTarget(self, action: #selector(presentModernLargeMedium), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("medium + large", for: .normal)
+        button.addTarget(self, action: #selector(presentModernMediumLarge), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
         button.setTitle("medium", for: .normal)
         button.addTarget(self, action: #selector(presentModernMedium), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
@@ -53,9 +65,34 @@ class ViewController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
+        button = UIButton(type: .system)
+        button.setTitle("[300 x 200] + m + l", for: .normal)
+        button.addTarget(self, action: #selector(presentModern300x200MediumLarge), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[300 x 200] + l", for: .normal)
+        button.addTarget(self, action: #selector(presentModern300x200Large), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[x 200] + m + l (not d)", for: .normal)
+        button.addTarget(self, action: #selector(presentModern300x200MediumLargeNotDismissable), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[x 200] + m (noanim)", for: .normal)
+        button.addTarget(self, action: #selector(presentModern300x200MediumNoAnimated), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
         let stackView0 = UIStackView(arrangedSubviews: buttons)
         stackView0.axis = .vertical
         stackView0.frame = CGRect(x: left, y: top, width: width, height: height * buttons.count)
+        stackView0.backgroundColor = .systemGray6
         view.addSubview(stackView0)
 
 
@@ -65,6 +102,18 @@ class ViewController: UIViewController {
         button = UIButton(type: .system)
         button.setTitle("legacy", for: .normal)
         button.addTarget(self, action: #selector(presentLegacy), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("large + medium", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacyLargeMedium), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("medium + large", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacyMediumLarge), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
@@ -92,9 +141,34 @@ class ViewController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
+        button = UIButton(type: .system)
+        button.setTitle("[300 x 200] + m + l", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacy300x200MediumLarge), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[300 x 200] + l", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacy300x200Large), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[x 200] + m + l (not d)", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacy300x200MediumLargeNotDismissable), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("[x 200] + m (noanim)", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacy300x200MediumNoAnimated), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
         let stackView1 = UIStackView(arrangedSubviews: buttons)
         stackView1.axis = .vertical
         stackView1.frame = CGRect(x: left + width, y: top, width: width, height: height * buttons.count)
+        stackView1.backgroundColor = .systemGray5
         view.addSubview(stackView1)
     }
 
@@ -106,17 +180,31 @@ class ViewController: UIViewController {
         sheet.present(from: self)
     }
 
+    @objc func presentModernLargeMedium() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.large, .medium]
+        sheet.present(from: self)
+    }
+
+    @objc func presentModernMediumLarge() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.medium, .large]
+        sheet.present(from: self)
+    }
+
     @objc func presentModernMedium() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.present(from: self)
     }
 
     @objc func presentModernMediumGrabber() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.prefersGrabberVisible = true
         sheet.present(from: self)
     }
@@ -124,7 +212,7 @@ class ViewController: UIViewController {
     @objc func presentModernNonDismissable() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.prefersGrabberVisible = false
         sheet.isDismissable = false
         sheet.present(from: self)
@@ -133,9 +221,42 @@ class ViewController: UIViewController {
     @objc func presentModern300x200() {
         let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
         let sheet = BottomSheetPresenter(content: sheetContent)
-        sheet.detent = .medium
+        sheet.detents = [.custom(height: 200)]
         sheet.prefersGrabberVisible = true
         sheet.present(from: self)
+    }
+
+    @objc func presentModern300x200MediumLarge() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.custom(height: 200), .medium, .large]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self)
+    }
+
+    @objc func presentModern300x200Large() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.custom(height: 200), .large]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self)
+    }
+
+    @objc func presentModern300x200MediumLargeNotDismissable() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.custom(height: 200), .medium, .large]
+        sheet.prefersGrabberVisible = true
+        sheet.isDismissable = false
+        sheet.present(from: self)
+    }
+
+    @objc func presentModern300x200MediumNoAnimated() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent)
+        sheet.detents = [.custom(height: 200), .medium]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self, animated: false)
     }
 
     // legacy button events
@@ -146,17 +267,31 @@ class ViewController: UIViewController {
         sheet.present(from: self)
     }
 
+    @objc func presentLegacyLargeMedium() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.large, .medium]
+        sheet.present(from: self)
+    }
+
+    @objc func presentLegacyMediumLarge() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.medium, .large]
+        sheet.present(from: self)
+    }
+
     @objc func presentLegacyMedium() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.present(from: self)
     }
 
     @objc func presentLegacyMediumGrabber() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.prefersGrabberVisible = true
         sheet.present(from: self)
     }
@@ -164,7 +299,7 @@ class ViewController: UIViewController {
     @objc func presentLegacyNonDismissable() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
-        sheet.detent = .medium
+        sheet.detents = [.medium]
         sheet.prefersGrabberVisible = false
         sheet.isDismissable = false
         sheet.present(from: self)
@@ -173,12 +308,46 @@ class ViewController: UIViewController {
     @objc func presentLegacy300x200() {
         let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
         let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
-        sheet.detent = .medium
+        sheet.detents = [.custom(height: 200)]
         sheet.prefersGrabberVisible = true
         sheet.present(from: self)
     }
+
+    @objc func presentLegacy300x200MediumLarge() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.custom(height: 200), .medium, .large]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self)
+    }
+
+    @objc func presentLegacy300x200Large() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.custom(height: 200), .large]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self)
+    }
+
+    @objc func presentLegacy300x200MediumLargeNotDismissable() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.custom(height: 200), .medium, .large]
+        sheet.prefersGrabberVisible = true
+        sheet.isDismissable = false
+        sheet.present(from: self)
+    }
+
+    @objc func presentLegacy300x200MediumNoAnimated() {
+        let sheetContent = ColorViewController(color: .orange, preferredContentSize: CGSize(width: 300, height: 200))
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.custom(height: 200), .medium]
+        sheet.prefersGrabberVisible = true
+        sheet.present(from: self, animated: false)
+    }
 }
 
+// MARK: - ColorViewController
 
 class ColorViewController: UIViewController {
 
@@ -210,7 +379,7 @@ class ColorViewController: UIViewController {
 
         let button = UIButton(type: .system)
         button.setTitle("close", for: .normal)
-        button.frame = CGRect(x: 40, y: 40, width: 80, height: 40)
+        button.frame = CGRect(x: 20, y: 20, width: 80, height: 40)
         button.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
         view.addSubview(button)
     }

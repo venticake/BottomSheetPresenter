@@ -6,8 +6,7 @@ A lightweight Swift package that provides a unified interface for presenting bot
 ## Features
 
 - ✅ Unified API for sheet presentation (Uses `UISheetPresentationController` on iOS 16+, Uses a custom `UIViewController` for iOS 13–15)
-- ✅ Supports for `.medium` / `.large` detents
-- ✅ Supports `preferredContentSize` for dynamic height
+- ✅ Supports for `.custom(height: CGFloat) / .medium` / `.large` detents
 - ✅ Optional grabber (`prefersGrabberVisible`)
 - ✅ Dismissal control (`isDismissable`)
 > ⚠️ **Note:** The current version only supports **Portrait orientation**. Landscape mode is not supported yet.
@@ -27,7 +26,7 @@ A lightweight Swift package that provides a unified interface for presenting bot
 ```swift
 let contentVC = YourContentViewController()
 let sheet = BottomSheetPresenter(content: contentVC)
-sheet.detent = .medium
+sheet.detents = [.medium, .large]
 sheet.prefersGrabberVisible = true
 sheet.isDismissable = true
 sheet.present(from: self)
@@ -39,10 +38,10 @@ sheet.present(from: self)
 contentVC.dismiss(animated: true)
 ```
 
-### Using Preferred Content Size
+### Using Custom Sheet Height with Multiple Detents
 
 ```swift
-contentVC.preferredContentSize = CGSize(width: 0, height: 300)
+sheet.detents = [.custom(height: 300), .large]
 ```
 
 
