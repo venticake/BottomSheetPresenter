@@ -23,6 +23,7 @@ A lightweight Swift package that provides a unified interface for presenting bot
 
 ### Basic Example
 
+#### UIKit
 ```swift
 let contentVC = YourContentViewController()
 let sheet = BottomSheetPresenter(content: contentVC)
@@ -30,6 +31,14 @@ sheet.detents = [.medium, .large]
 sheet.prefersGrabberVisible = true
 sheet.isDismissable = true
 sheet.present(from: self)
+```
+
+#### SwiftUI
+```swift
+let sheet = BottomSheetPresenter(view: YourSwiftUIContentView())
+sheet.detents = [.custom(height: 200), .medium]
+sheet.prefersGrabberVisible = true
+sheet.present(from: self, animated: true)
 ```
 
 ### Programmatic Dismiss
