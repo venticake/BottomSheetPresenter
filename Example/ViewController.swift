@@ -7,6 +7,7 @@
 
 import UIKit
 import BottomSheetPresenter
+import SwiftUI
 
 class ViewController: UIViewController {
 
@@ -90,6 +91,12 @@ class ViewController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
+        button = UIButton(type: .system)
+        button.setTitle("SwiftUI [x 200] + m", for: .normal)
+        button.addTarget(self, action: #selector(presentModernSwiftUI300x200Medium), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
         let stackView0 = UIStackView(arrangedSubviews: buttons)
         stackView0.axis = .vertical
         stackView0.frame = CGRect(x: left, y: top, width: width, height: height * buttons.count)
@@ -166,11 +173,31 @@ class ViewController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
+        button = UIButton(type: .system)
+        button.setTitle("SwiftUI [x 200] + m", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacySwiftUI300x200Medium), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
         let stackView1 = UIStackView(arrangedSubviews: buttons)
         stackView1.axis = .vertical
         stackView1.frame = CGRect(x: left + width, y: top, width: width, height: height * buttons.count)
         stackView1.backgroundColor = .systemGray5
         view.addSubview(stackView1)
+
+        // add open StartView(swiftUI)
+        let openStartViewButton = UIButton(type: .system)
+        openStartViewButton.setTitle("StartView (SwiftUI)", for: .normal)
+        openStartViewButton.addTarget(self, action: #selector(openStartView), for: .touchUpInside)
+        openStartViewButton.frame = CGRect(x: left, y: top + height * buttons.count, width: width * 2, height: height)
+        openStartViewButton.backgroundColor = .lightGray
+        view.addSubview(openStartViewButton)
+    }
+
+    @objc func openStartView() {
+        DispatchQueue.main.async {
+            self.present(UIHostingController(rootView: StartView()), animated: true)
+        }
     }
 
     // modern button events
@@ -260,6 +287,19 @@ class ViewController: UIViewController {
         sheet.present(from: self, animated: false)
     }
 
+    @objc func presentModernSwiftUI300x200Medium() {
+        if #available(iOS 15.0, *) {
+            let sheet = BottomSheetPresenter(view: ColorView(color: .green))
+            sheet.detents = [.custom(height: 200), .medium]
+            sheet.prefersGrabberVisible = true
+            sheet.present(from: self, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "SwiftUI is not available on this version of iOS.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+
     // legacy button events
 
     @objc func presentLegacy() {
@@ -346,46 +386,17 @@ class ViewController: UIViewController {
         sheet.prefersGrabberVisible = true
         sheet.present(from: self, animated: false)
     }
-}
 
-// MARK: - ColorViewController
-
-class ColorViewController: UIViewController {
-
-    let color: UIColor
-
-    init(color: UIColor, preferredContentSize: CGSize? = nil) {
-        self.color = color
-        super.init(nibName: nil, bundle: nil)
-        if let preferredContentSize {
-            self.preferredContentSize = preferredContentSize
+    @objc func presentLegacySwiftUI300x200Medium() {
+        if #available(iOS 15.0, *) {
+            let sheet = BottomSheetPresenter(view: ColorView(color: .green), useLegacyForcely: true)
+            sheet.detents = [.custom(height: 200), .medium]
+            sheet.prefersGrabberVisible = true
+            sheet.present(from: self, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "SwiftUI is not available on this version of iOS.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("Not implemented")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = color
-
-        let contentSizeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: preferredContentSize.width, height: preferredContentSize.height))
-        contentSizeLabel.backgroundColor = UIColor.cyan.withAlphaComponent(0.5)
-        contentSizeLabel.textAlignment = .center
-        contentSizeLabel.text = "\(preferredContentSize.width) x \(preferredContentSize.height)";
-        contentSizeLabel.layer.masksToBounds = true
-        contentSizeLabel.layer.cornerRadius = 20.0
-        view.addSubview(contentSizeLabel)
-
-        let button = UIButton(type: .system)
-        button.setTitle("close", for: .normal)
-        button.frame = CGRect(x: 20, y: 20, width: 80, height: 40)
-        button.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
-        view.addSubview(button)
-    }
-
-    @objc func closeButtonTouched() {
-        self.dismiss(animated: true)
     }
 }

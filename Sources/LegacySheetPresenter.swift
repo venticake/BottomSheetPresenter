@@ -40,7 +40,13 @@ class LegacySheetPresenter: BottomSheetPresenting {
 
 // MARK: - CustomBottomSheetViewController
 
-fileprivate class CustomBottomSheetViewController: UIViewController {
+protocol CustomBottomSheetViewControllerDelegate: AnyObject {
+    func bottomSheetDidDismiss()
+}
+
+class CustomBottomSheetViewController: UIViewController {
+    weak var dismissDelegate: CustomBottomSheetViewControllerDelegate?
+
     private let contentVC: UIViewController
     private let detents: [BottomSheetDetent]
     private var currentDetent: BottomSheetDetent
@@ -68,8 +74,6 @@ fileprivate class CustomBottomSheetViewController: UIViewController {
         self.modalPresentationStyle = .custom
 
         self.containerHeight = currentDetent.height + parentViewSafeAreaInsets.bottom
-//        self.contentHeight = currentDetent.height
-//        self.containerViewHeight = contentHeight + parentViewSafeAreaInsets.bottom
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -77,6 +81,13 @@ fileprivate class CustomBottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isBeingDismissed {
+            dismissDelegate?.bottomSheetDidDismiss()
+        }
     }
 
     private func setupViews() {

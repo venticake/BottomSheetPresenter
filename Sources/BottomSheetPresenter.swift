@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - BottomSheetDetent
+
 public enum BottomSheetDetent {
     case medium
     case large
@@ -38,6 +40,8 @@ extension BottomSheetDetent: Equatable {
     }
 }
 
+// MARK: - BottomSheetPresenter
+
 public class BottomSheetPresenter {
     public var detents: [BottomSheetDetent] = [.large]
     public var prefersGrabberVisible: Bool = false
@@ -64,6 +68,17 @@ public class BottomSheetPresenter {
         presenter.presentSheet(from: parent, animated: animated)
     }
 }
+
+import SwiftUI
+
+public extension BottomSheetPresenter {
+
+    convenience init(view: some View, useLegacyForcely: Bool = false) {
+        self.init(content: UIHostingController(rootView: view), useLegacyForcely: useLegacyForcely)
+    }
+}
+
+// MARK: - BottomSheetPresenting
 
 protocol BottomSheetPresenting {
     var detents: [BottomSheetDetent] { get set }

@@ -12,6 +12,7 @@
 		2CD3838F2DBCD2640064E72C /* BottomSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79289A2DBB4672009672B7 /* BottomSheetPresenter.swift */; };
 		2CD383902DBCD2640064E72C /* LegacySheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79289D2DBB481D009672B7 /* LegacySheetPresenter.swift */; };
 		2CD383912DBCD2640064E72C /* ModernSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79289B2DBB4805009672B7 /* ModernSheetPresenter.swift */; };
+		2CD383992DBDFC650064E72C /* View+BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD383982DBDFC630064E72C /* View+BottomSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		2C7928A32DBBA5E6009672B7 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		2C7928B42DBBA6A5009672B7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CD3837F2DBCD24F0064E72C /* BottomSheetPresenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BottomSheetPresenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD383982DBDFC630064E72C /* View+BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+BottomSheet.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -111,6 +113,7 @@
 		2C7928992DBB4667009672B7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CD383982DBDFC630064E72C /* View+BottomSheet.swift */,
 				2C79289A2DBB4672009672B7 /* BottomSheetPresenter.swift */,
 				2C79289B2DBB4805009672B7 /* ModernSheetPresenter.swift */,
 				2C79289D2DBB481D009672B7 /* LegacySheetPresenter.swift */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CD3838F2DBCD2640064E72C /* BottomSheetPresenter.swift in Sources */,
+				2CD383992DBDFC650064E72C /* View+BottomSheet.swift in Sources */,
 				2CD383902DBCD2640064E72C /* LegacySheetPresenter.swift in Sources */,
 				2CD383912DBCD2640064E72C /* ModernSheetPresenter.swift in Sources */,
 			);
