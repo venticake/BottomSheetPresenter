@@ -32,7 +32,7 @@ class ModernSheetPresenter: BottomSheetPresenting {
                 case .large:
                     return .large()
                 case .custom(let height):
-                    return .custom(identifier: .init("custom_\(Int(height)))")) { _ in height }
+                    return .custom(identifier: .init("custom_\(Int(height))")) { _ in height }
                 }
             }
             sheet.prefersGrabberVisible = prefersGrabberVisible
