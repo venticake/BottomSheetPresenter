@@ -9,6 +9,7 @@ A lightweight Swift package that provides a unified interface for presenting bot
 - ✅ Supports for `.custom(height: CGFloat) / .medium` / `.large` detents
 - ✅ Optional grabber (`prefersGrabberVisible`)
 - ✅ Dismissal control (`isDismissable`)
+- ✅ Optional content clipping control (`allowsContentOutOfBounds`)
 > ⚠️ **Note:** The current version only supports **Portrait orientation**. Landscape mode is not supported yet.
 
 
@@ -30,6 +31,7 @@ let sheet = BottomSheetPresenter(content: contentVC)
 sheet.detents = [.medium, .large]
 sheet.prefersGrabberVisible = true
 sheet.isDismissable = true
+sheet.allowsContentOutOfBounds = true // Allow content to extend beyond the sheet's bounds
 sheet.present(from: self)
 ```
 
