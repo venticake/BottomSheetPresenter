@@ -11,6 +11,7 @@ class LegacySheetPresenter: BottomSheetPresenting {
     var detents: [BottomSheetDetent] = [.large]
     var prefersGrabberVisible: Bool = false
     var isDismissable: Bool = true
+    var allowsContentOutOfBounds: Bool = false
 
     private let content: UIViewController
 
@@ -24,6 +25,7 @@ class LegacySheetPresenter: BottomSheetPresenting {
             detents: detents,
             grabber: prefersGrabberVisible,
             isDismissable: isDismissable,
+            clipsToBounds: !allowsContentOutOfBounds,
             parentViewSafeAreaInsets: parent.view.safeAreaInsets
         )
         sheetVC.modalPresentationStyle = .custom
@@ -52,6 +54,7 @@ class CustomBottomSheetViewController: UIViewController {
     private var currentDetent: BottomSheetDetent
     private let showGrabber: Bool
     private let isDismissable: Bool
+    private let clipsToBounds: Bool
     private let parentViewSafeAreaInsets: UIEdgeInsets
 
     let dimmedView = UIView()
@@ -60,12 +63,13 @@ class CustomBottomSheetViewController: UIViewController {
     private var containerHeight: CGFloat = 0.0
     private var containerViewHeightConstraint: NSLayoutConstraint?
 
-    init(content: UIViewController, detents: [BottomSheetDetent], grabber: Bool, isDismissable: Bool, parentViewSafeAreaInsets: UIEdgeInsets) {
+    init(content: UIViewController, detents: [BottomSheetDetent], grabber: Bool, isDismissable: Bool, clipsToBounds: Bool, parentViewSafeAreaInsets: UIEdgeInsets) {
         self.contentVC = content
         self.detents = detents
         self.currentDetent = detents.first ?? .large
         self.showGrabber = grabber
         self.isDismissable = isDismissable
+        self.clipsToBounds = clipsToBounds
         self.parentViewSafeAreaInsets = parentViewSafeAreaInsets
 
         super.init(nibName: nil, bundle: nil)
@@ -114,6 +118,7 @@ class CustomBottomSheetViewController: UIViewController {
         containerView.backgroundColor = .systemBackground
         containerView.layer.cornerRadius = 12
         containerView.layer.masksToBounds = true
+        containerView.clipsToBounds = self.clipsToBounds
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)

@@ -26,6 +26,12 @@ class ColorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = color
+        self.view.clipsToBounds = false
+
+        let rectangleView = UIView(frame: CGRect(x: 100, y: -100, width: 200, height: 300))
+        rectangleView.backgroundColor = .blue
+        rectangleView.layer.cornerRadius = 20.0
+        view.addSubview(rectangleView)
 
         let contentSizeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: preferredContentSize.width, height: preferredContentSize.height))
         contentSizeLabel.backgroundColor = UIColor.cyan.withAlphaComponent(0.5)

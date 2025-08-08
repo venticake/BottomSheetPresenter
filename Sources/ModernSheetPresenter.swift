@@ -13,6 +13,7 @@ class ModernSheetPresenter: BottomSheetPresenting {
     var detents: [BottomSheetDetent] = [.large]
     var prefersGrabberVisible: Bool = false
     var isDismissable: Bool = true
+    var allowsContentOutOfBounds: Bool = false // ModernSheetPresenter에서는 동작하지 않습니다. 항상 false로 설정됩니다.
 
     private let content: UIViewController
 

@@ -50,6 +50,12 @@ class ViewController: UIViewController {
         buttons.append(button)
 
         button = UIButton(type: .system)
+        button.setTitle("medium out of bounds", for: .normal)
+        button.addTarget(self, action: #selector(presentModernMediumOutOfBounds), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
         button.setTitle("medium + grabber", for: .normal)
         button.addTarget(self, action: #selector(presentModernMediumGrabber), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
@@ -128,6 +134,12 @@ class ViewController: UIViewController {
         button = UIButton(type: .system)
         button.setTitle("medium", for: .normal)
         button.addTarget(self, action: #selector(presentLegacyMedium), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        buttons.append(button)
+
+        button = UIButton(type: .system)
+        button.setTitle("medium out of bounds", for: .normal)
+        button.addTarget(self, action: #selector(presentLegacyMediumOutOfBounds), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: width, height: height)
         buttons.append(button)
 
@@ -219,6 +231,13 @@ class ViewController: UIViewController {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent)
         sheet.detents = [.medium, .large]
+        sheet.present(from: self)
+    }
+
+    @objc func presentModernMediumOutOfBounds() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent, allowsContentOutOfBounds: true)
+        sheet.detents = [.medium]
         sheet.present(from: self)
     }
 
@@ -325,6 +344,13 @@ class ViewController: UIViewController {
     @objc func presentLegacyMedium() {
         let sheetContent = ColorViewController(color: .orange)
         let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true)
+        sheet.detents = [.medium]
+        sheet.present(from: self)
+    }
+
+    @objc func presentLegacyMediumOutOfBounds() {
+        let sheetContent = ColorViewController(color: .orange)
+        let sheet = BottomSheetPresenter(content: sheetContent, useLegacyForcely: true, allowsContentOutOfBounds: true)
         sheet.detents = [.medium]
         sheet.present(from: self)
     }

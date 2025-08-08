@@ -46,11 +46,14 @@ public class BottomSheetPresenter {
     public var detents: [BottomSheetDetent] = [.large]
     public var prefersGrabberVisible: Bool = false
     public var isDismissable: Bool = true
+    public var allowsContentOutOfBounds: Bool = false
 
     private var presenter: BottomSheetPresenting
 
-    public init(content: UIViewController, useLegacyForcely: Bool = false) {
-        if (useLegacyForcely) {
+    public init(content: UIViewController, useLegacyForcely: Bool = false, allowsContentOutOfBounds: Bool = false) {
+        self.allowsContentOutOfBounds = allowsContentOutOfBounds
+
+        if useLegacyForcely || allowsContentOutOfBounds {
             presenter = LegacySheetPresenter(content: content)
         } else {
             if #available(iOS 16.0, *) {
@@ -65,6 +68,7 @@ public class BottomSheetPresenter {
         presenter.detents = detents
         presenter.prefersGrabberVisible = prefersGrabberVisible
         presenter.isDismissable = isDismissable
+        presenter.allowsContentOutOfBounds = allowsContentOutOfBounds
         presenter.presentSheet(from: parent, animated: animated)
     }
 }
@@ -84,5 +88,6 @@ protocol BottomSheetPresenting {
     var detents: [BottomSheetDetent] { get set }
     var prefersGrabberVisible: Bool { get set }
     var isDismissable: Bool { get set }
+    var allowsContentOutOfBounds: Bool { get set } // 시트 바깥 영역으로 뷰를 보여주는지 여부. clipsToBounds 설정을 위한 변수
     func presentSheet(from parent: UIViewController, animated: Bool)
 }
