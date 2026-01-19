@@ -47,6 +47,7 @@ public class BottomSheetPresenter {
     public var prefersGrabberVisible: Bool = false
     public var isDismissable: Bool = true
     public var allowsContentOutOfBounds: Bool = false
+    public var preferredCornerRadius: CGFloat? = nil
 
     private var presenter: BottomSheetPresenting
 
@@ -69,6 +70,7 @@ public class BottomSheetPresenter {
         presenter.prefersGrabberVisible = prefersGrabberVisible
         presenter.isDismissable = isDismissable
         presenter.allowsContentOutOfBounds = allowsContentOutOfBounds
+        presenter.preferredCornerRadius = preferredCornerRadius
         presenter.presentSheet(from: parent, animated: animated)
     }
 }
@@ -89,5 +91,6 @@ protocol BottomSheetPresenting {
     var prefersGrabberVisible: Bool { get set }
     var isDismissable: Bool { get set }
     var allowsContentOutOfBounds: Bool { get set } // 시트 바깥 영역으로 뷰를 보여주는지 여부. clipsToBounds 설정을 위한 변수
+    var preferredCornerRadius: CGFloat? { get set } // iOS 26.0 미만에서는 위쪽 두 모서리의 cornerRadius, iOS 26.0 부터는 네 모서리의 cornerRadius
     func presentSheet(from parent: UIViewController, animated: Bool)
 }

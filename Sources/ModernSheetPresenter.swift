@@ -14,6 +14,7 @@ class ModernSheetPresenter: BottomSheetPresenting {
     var prefersGrabberVisible: Bool = false
     var isDismissable: Bool = true
     var allowsContentOutOfBounds: Bool = false // ModernSheetPresenter에서는 동작하지 않습니다. 항상 false로 설정됩니다.
+    var preferredCornerRadius: CGFloat? = nil
 
     private let content: UIViewController
 
@@ -40,6 +41,7 @@ class ModernSheetPresenter: BottomSheetPresenting {
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.prefersEdgeAttachedInCompactHeight = true
             sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            sheet.preferredCornerRadius = preferredCornerRadius
 
             // Prevent dismissal by background
             if !isDismissable {
