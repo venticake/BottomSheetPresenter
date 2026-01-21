@@ -12,6 +12,7 @@ class LegacySheetPresenter: BottomSheetPresenting {
     var prefersGrabberVisible: Bool = false
     var isDismissable: Bool = true
     var allowsContentOutOfBounds: Bool = false
+    var preferredCornerRadius: CGFloat? = nil
 
     private let content: UIViewController
 
@@ -26,7 +27,8 @@ class LegacySheetPresenter: BottomSheetPresenting {
             grabber: prefersGrabberVisible,
             isDismissable: isDismissable,
             clipsToBounds: !allowsContentOutOfBounds,
-            parentViewSafeAreaInsets: parent.view.safeAreaInsets
+            parentViewSafeAreaInsets: parent.view.safeAreaInsets,
+            cornerRadius: preferredCornerRadius
         )
         sheetVC.modalPresentationStyle = .custom
 
@@ -56,6 +58,7 @@ class CustomBottomSheetViewController: UIViewController {
     private let isDismissable: Bool
     private let clipsToBounds: Bool
     private let parentViewSafeAreaInsets: UIEdgeInsets
+    private let cornerRadius: CGFloat
 
     let dimmedView = UIView()
     let containerView = UIView()
@@ -63,7 +66,7 @@ class CustomBottomSheetViewController: UIViewController {
     private var containerHeight: CGFloat = 0.0
     private var containerViewHeightConstraint: NSLayoutConstraint?
 
-    init(content: UIViewController, detents: [BottomSheetDetent], grabber: Bool, isDismissable: Bool, clipsToBounds: Bool, parentViewSafeAreaInsets: UIEdgeInsets) {
+    init(content: UIViewController, detents: [BottomSheetDetent], grabber: Bool, isDismissable: Bool, clipsToBounds: Bool, parentViewSafeAreaInsets: UIEdgeInsets, cornerRadius: CGFloat? = nil) {
         self.contentVC = content
         self.detents = detents
         self.currentDetent = detents.first ?? .large
@@ -71,6 +74,7 @@ class CustomBottomSheetViewController: UIViewController {
         self.isDismissable = isDismissable
         self.clipsToBounds = clipsToBounds
         self.parentViewSafeAreaInsets = parentViewSafeAreaInsets
+        self.cornerRadius = cornerRadius ?? 12.0
 
         super.init(nibName: nil, bundle: nil)
 
@@ -116,7 +120,7 @@ class CustomBottomSheetViewController: UIViewController {
 
         // 2. Container View
         containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 12
+        containerView.layer.cornerRadius = cornerRadius
         containerView.layer.masksToBounds = true
         containerView.clipsToBounds = self.clipsToBounds
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
